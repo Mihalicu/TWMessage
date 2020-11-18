@@ -1,25 +1,72 @@
-import logo from './logo.svg';
+import react, { useState, useEffect} from 'react';
+import {Button, FormControl, InputLabel,Input}  from '@material-ui/core';
+import firebase from 'firebase'
 import './App.css';
-
+import Message from './Message';
+import db from './Firebase';
+ 
 function App() {
+  const [input, setInput] = useState('');
+  const [username,setUsername] = useState('');
+
+  const [messages, setMessages] = useState([]);
+ 
+
+  
+const sendMessage = (event) => {
+  event.preventDefault();//pt ambrosia
+
+
+
+  /*db.collection('messages').add({
+    message: input,
+    username: username,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  })*/
+  setMessages([...messages,{username: username, message: input}]);
+  setInput('');
+
+}
+useEffect(() => {
+  
+  setUsername(prompt('Please enter your name'));
+}, [])
+// daca [] e gol, useEffect se executa o singura data la onLoad()
+
+
+useEffect(() => {
+  
+  db.collection('messages').onSnapshot(snapshot =>{ 
+    setMessages(snapshot.docs.map(doc => doc.data()))
+  })
+}, [])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>MESSENGER TW</h1>
+    <h2>Wellcome {username}</h2>
+      <form>
+      <FormControl>
+      <InputLabel >Enter a message</InputLabel>
+      <Input value = { input } onChange={event => setInput(event.target.value)}/>
+      <Button disabled ={!input} variant ='contained' color='primary' type ='submit' onClick={sendMessage}>Send</Button>
+      </FormControl>
+      
+      </form>
+     
+
+      {
+        messages.map(message => (
+          <Message username={username} message ={message} />
+        
+        ))
+      }
+
+      
     </div>
   );
 }
+
 
 export default App;
