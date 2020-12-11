@@ -3,7 +3,7 @@ import {Button, FormControl, InputLabel,Input}  from '@material-ui/core';
 
 import './App.css';
 import Message from './Message';
-//import db from './firebase';
+import db from './firebase';
 import firebase from 'firebase';
 import firebaseApp from "firebase";
  
@@ -19,13 +19,12 @@ const sendMessage = (event) => {
   event.preventDefault();//pt ambrosia
 
 
-
-  firebaseApp.firestore().collection('messages').add({
+    db.collection('messages').add({
     message: input,
     username: username,
     timestamp: firebase.firestore.FieldValue.serverTimestamp()
   })
-  setMessages([...messages,{username: username, message: input}]);
+  setMessages([...messages,{username: username, message: input}])
   setInput('');
 
 }
@@ -38,7 +37,7 @@ useEffect(() => {
 
 useEffect(() => {
 
-  firebaseApp.firestore().collection('messages').onSnapshot(snapshot =>{
+  db.collection('messages').onSnapshot(snapshot =>{
     setMessages(snapshot.docs.map(doc => doc.data()))
   })
 }, [])

@@ -2,18 +2,17 @@ import firebase from "firebase";
 
 
 
-
 const firebaseApp = firebase.initializeApp({
 
-    apiKey: "AIzaSyBRx3i-w6UuXdgjgFy07iKdmY_QlQfkJxA",
-    authDomain: "twmessenger-528a2.firebaseapp.com",
-    databaseURL: "https://twmessenger-528a2.firebaseio.com",
-    projectId: "twmessenger-528a2",
-    storageBucket: "twmessenger-528a2.appspot.com",
-    messagingSenderId: "288689082243",
-    appId: "1:288689082243:web:21b73b3162f08959c2b0b6"
-
+    apiKey: "AIzaSyBGeme1oHz9fAS_3x39tU-cd7GySv32S4I",
+    authDomain: "proiecttw-c12c1.firebaseapp.com",
+    projectId: "proiecttw-c12c1",
+    storageBucket: "proiecttw-c12c1.appspot.com",
+    messagingSenderId: "13921047644",
+    appId: "1:13921047644:web:7607dd82394b1925ba4299",
+    measurementId: "G-N3ZQZL01LE",
+    databaseURL: "https://proiecttw-c12c1-default-rtdb.firebaseio.com"
 });
-//const db = firebaseApp.firestore();
+const db = firebaseApp.firestore();
 
-export default firebaseApp;
+export default db;
