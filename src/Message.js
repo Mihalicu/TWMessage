@@ -23,4 +23,4 @@ function Message({message, username}) {
     )
 }
 
-export default Message
+export default Message;

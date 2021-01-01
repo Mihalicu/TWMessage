@@ -3,9 +3,9 @@ import {Button, FormControl, InputLabel,Input}  from '@material-ui/core';
 
 import './App.css';
 import Message from './Message';
-import db from './firebase';
+import firebaseApp from './firebase';
 import firebase from 'firebase';
-import firebaseApp from "firebase";
+import Login from'./Login';
  
 function App() {
   const [input, setInput] = useState('');
@@ -19,7 +19,7 @@ const sendMessage = (event) => {
   event.preventDefault();//pt ambrosia
 
 
-    db.collection('messages').add({
+    firebaseApp.firestore().collection('messages').add({
     message: input,
     username: username,
     timestamp: firebase.firestore.FieldValue.serverTimestamp()
@@ -37,7 +37,7 @@ useEffect(() => {
 
 useEffect(() => {
 
-  db.collection('messages').orderBy('timestamp','desc')
+  firebaseApp.firestore().collection('messages').orderBy('timestamp','desc')
   .onSnapshot(snapshot =>{
     setMessages(snapshot.docs.map(doc => doc.data()))
   })

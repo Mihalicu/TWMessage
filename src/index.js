@@ -2,14 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-
+import Login from './Login'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Login />
+    
+    
+ 
   </React.StrictMode>,
   document.getElementById('message')
 );
+
+/*
+let Index = () =>{
+  return(
+    <Login/>
+  );
+};
+export default Index;*/
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
